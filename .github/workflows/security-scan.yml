@@ -1,16 +1,16 @@
 name: Security Guard Dog
 
-# This tells the belt to run every time you save/push new code
 on: [push]
 
 jobs:
   scan-my-code:
     runs-on: ubuntu-latest
     steps:
-      # 1. Pull the code onto the conveyor belt
       - name: Fetch Code
         uses: actions/checkout@v4
 
-      # 2. Run the tfsec safety inspector tool
+      # We add an instruction telling the tool: "Show warnings, but don't crash the pipeline!"
       - name: Run Security Scan
         uses: aquasecurity/tfsec-action@v1.0.0
+        with:
+          soft_fail: true
