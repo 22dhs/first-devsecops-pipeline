@@ -12,7 +12,7 @@ resource "aws_security_group" "safe_firewall" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["192.168.1.50/32"] 
+    cidr_blocks = ["8.8.8.8/32"] 
   }
 
   # Exit Door (Egress) - Security tools require you to explicitly define where traffic leaves
