@@ -1,30 +1,16 @@
-name: Enterprise Security Shield
+name: Day 2 Script Executor
 
 on: [push]
 
 jobs:
-  security-audit:
+  run-bash-script:
     runs-on: ubuntu-latest
     steps:
-      # 1. Pull your code onto the conveyor belt
       - name: Fetch Code
         uses: actions/checkout@v4
 
-      # 2. Run your Level 1 Terraform Scanner (from Project 1)
-      - name: Run IaC Scan
-        uses: aquasecurity/tfsec-action@v1.0.0
-        with:
-          soft_fail: true
-
-      # 3. Build the Docker robot container behind the scenes
-      - name: Build Docker Image
-        run: docker build -t my-secure-app:latest .
-
-      # 4. Run the Level 2 Trivy Container X-Ray Machine!
-      - name: Run Container Security Scan
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: 'my-secure-app:latest'
-          format: 'table'
-          exit-code: '0' # Keeps the conveyor belt green for now so we can audit the results!
-          severity: 'CRITICAL,HIGH'
+      # This step turns your script into an executable program and runs it
+      - name: Execute Security Script
+        run: |
+          chmod +x day2_script.sh
+          ./day2_script.sh
